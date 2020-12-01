@@ -14,7 +14,7 @@ use App\Models\User;
 | and give it the Closure to call when that URI is requested.
 |
 */
-
+use Illuminate\Http\Request;
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
@@ -23,10 +23,10 @@ $router->post('/register', 'UsersController@register');
 $router->get('/users/{id}', 'UsersController@get');
 $router->get('/users', 'UsersController@index');
 
-// $router->get('/api/user', function(Request $request) {
-//     $user = $request->user();
-//     return $user->toArray();
-// });
+$router->get('/api/user', function(Request $request) {
+    $user = $request->user();
+    return $user->toArray();
+});
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('user/{id}/details', function ($id){
