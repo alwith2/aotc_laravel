@@ -1,10 +1,11 @@
 <?php
 
 namespace Database\Seeders;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use App\Models\Post;
 
-class ProductsSeeder extends Seeder
+class PostsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +14,6 @@ class ProductsSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\Products::factory()->count(50)->create();
+        Post::factory()->count(20)->create();
     }
 }

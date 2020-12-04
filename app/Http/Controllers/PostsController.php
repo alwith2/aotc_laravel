@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\cart;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class CartController extends Controller
+class PostsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function index()
+    public function viewAll()
     {
-        //
+
+        return Post::all();
     }
 
     /**
@@ -23,9 +23,15 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $user = $request->user();
+        $post = new Post;
+        $post->post = request('post');
+        $post->ref_user_id = $user['id'];
+        $post->ref_parent_post_id = request('ref_parent_post_id');
+        $post->save();
     }
 
     /**
@@ -37,15 +43,21 @@ class CartController extends Controller
     public function store(Request $request)
     {
         //
+        $post = new Post;
+        $input = $request->all();
+        $post->post = $input['post'];
+        $post->ref_user_id = $input['ref_user_id'];
+        $post->ref_parent_post_id = $input['ref_parent_post_id'];
+        $post->save();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\cart  $cart
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $cart)
+    public function show(Post $posts)
     {
         //
     }
@@ -53,10 +65,10 @@ class CartController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\cart  $cart
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $cart)
+    public function edit(Post $posts)
     {
         //
     }
@@ -65,10 +77,10 @@ class CartController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\cart  $cart
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $cart)
+    public function update(Request $request, Post $post)
     {
         //
     }
@@ -76,10 +88,10 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\cart  $cart
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $cart)
+    public function destroy(Post $post)
     {
         //
     }

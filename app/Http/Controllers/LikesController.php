@@ -33,14 +33,5 @@ class UsersController extends Controller
 
         return response(['data' => $data, 'message' => 'Account created successfully!', 'status' => true]);
     }  
-
-    public function logout(Request $request)
-    {
-        $request->user()->token()->revoke();
-        $request->user()->token()->delete();
-
-        $response = 'You have been logged out';
-        return response($response, 200);
-    }
      
 }
