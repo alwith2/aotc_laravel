@@ -31,7 +31,6 @@ $router->get('/api/user', function (Request $request) {
 });
 
 $router->post('/post', 'PostsController@store');
-$router->post('/makePost', 'PostsController@create');
 $router->get('/posts/all', 'PostsController@viewAll');
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
@@ -39,7 +38,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
         $user = User::find($id);
         return $user->toArray();
     });
-
+    $router->post('/makePost', 'PostsController@create');
     $router->get('/logout', 'UsersController@logout');
 
     

@@ -32,6 +32,7 @@ class PostsController extends Controller
         $post->ref_user_id = $user['id'];
         $post->ref_parent_post_id = request('ref_parent_post_id');
         $post->save();
+        return Post::all();
     }
 
     /**
